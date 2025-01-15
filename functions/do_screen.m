@@ -6,6 +6,10 @@ function [w, center] = doScreen
 % open window and find center
 S = Screen('Screens');
 screen_num = max(S);
+
+% Uncomment if sync trouble
+% Screen('Preference','SkipSyncTests', 1);
+
 [w, rect] = Screen('OpenWindow', screen_num);
 center = rect(3:4) / 2;
 
