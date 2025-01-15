@@ -3,10 +3,9 @@ function [status, start_time] = start_scan
 % cable. --Michael 09/30/2013
 
 try
-    s = serial('/dev/tty.usbmodem12341', 'BaudRate', 57600);
-    fopen(s);
-    fprintf(s, '[t]');
-    fclose(s);
+    RestrictKeysForKbCheck([KbName('S'), KbName('5')]);
+    start_time = KbWait(-3,2); % -3 = device number, 2 = single keystroke
+    RestrictKeysForKbCheck([KbName('A'), KbName('B'), KbName('C'), KbName('D'), KbName('G'), KbName('.')]);
 catch
     err
 end
@@ -15,7 +14,6 @@ if exist('err','var') == 0
     start_time  = GetSecs;
     status = 0;
 else
-    start_time = GetSecs;
     status = 1;
 end
 
